@@ -36,5 +36,20 @@ class BasePage
     find(locator).text
   end
 
+  def see_text?(text, locator = nil, *options)
+    if locator.nil?
+      text_displayed = @driver.text
+    else
+      text_displayed = text(locator)
+    end
+    if options.empty?
+      text_displayed.include? text
+    elsif options[:exact]
+      text_displayed.eql? text
+    else
+      raise Exception, "Unknown options! options: #{options.inspect}"
+    end
+  end
+
 
 end

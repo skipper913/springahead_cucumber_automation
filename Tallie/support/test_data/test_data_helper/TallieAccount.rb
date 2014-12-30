@@ -1,6 +1,8 @@
 
 
 class TallieEnterpriseAccount
+  attr_accessor :logged_in_employee, :enterprise_name, :usage
+
   def initialize(enterprise_name = nil, usage = 'DefaulEnterprise', employees = {})
     @enterprise_name = enterprise_name
     @usage = usage
@@ -8,6 +10,7 @@ class TallieEnterpriseAccount
 
     @employees = employees
     load_employees
+    @logged_in_employee = {name: nil, email: nil, password: nil}
   end
 
   def default_employee

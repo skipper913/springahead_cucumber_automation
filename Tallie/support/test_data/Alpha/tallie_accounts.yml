@@ -1,8 +1,8 @@
 DefaulEnterprise:
-  Name: 'Alpha Go Go'
+  Name: 'Fiesta Go Go'
   Employees:
     DefaultEmployee:
-      Name: 'Midori Wasada'
+      Name: 'Alpha Test'
       Email: 'midori+alpha@springahead.com'
       Password: 'Gomidogogo7711'
 
