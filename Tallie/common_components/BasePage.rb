@@ -51,5 +51,25 @@ class BasePage
     end
   end
 
+  def on_right_page?(partial_url)
+    1.upto(30) do
+        return true if @driver.current_url.downcase.include? partial_url.downcase
+    end
+    return false
+  end
+
+  def try_upto(times, second, condition, *params_to_condition)
+    i = 0
+    params_to_condition.each do
+      condition += " params_to_condition[#{i}]"
+      i+= 1
+    end
+    1.upto(times) do
+      break if eval("#{condition}")
+      yield
+      sleep second
+    end
+  end
+
 
 end
