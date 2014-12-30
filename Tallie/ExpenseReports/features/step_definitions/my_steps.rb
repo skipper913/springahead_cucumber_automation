@@ -6,7 +6,7 @@ And(/^I have a new expense tile opened \-\- expense$/) do
 end
 
 When(/^I enter below data in the expense tile$/) do
-  puts "My step:  I enter below data in the expense tile"
+  puts "My step:  I enter below test_data in the expense tile"
 end
 
 

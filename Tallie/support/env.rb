@@ -1,14 +1,18 @@
-require 'watir-webdriver'
+require 'selenium-webdriver'
 
-#if ENV["BROWSER"] == 'FireFox'
-  browser = Watir::Browser.new :firefox
-  WEBDRIVER = true
-#end
+if ENV['base_url'].include? 'alpha'
+  ENV['env'] = 'alpha'
+else
+  ENV['env'] = 'production'
+end
+
+driver = Selenium::WebDriver.for ENV['browser'].to_sym
 
 Before do
-  @browser = browser
+  @driver = driver
 end
 
 at_exit do
-  browser.close
+  #@driver.close
+  driver.quit
 end

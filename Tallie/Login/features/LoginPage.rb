@@ -1,34 +1,31 @@
-
 class LoginPage < BasePage
 
   USERNAME_INPUT = {id: 'Email'}
   PASSWORD_INPUT = {id: 'Password'}
-  SUBMIT_BUTTON = {class: 'btn btn-success'}
-  SIGN_IN_H2 = {class: 'login-icon'}  ## Unable to find a good page element locator.  Ask dev to add an id to the h2 tag
+  SUBMIT_BUTTON = {css: '.btn.btn-success'}
+  SIGN_IN_H2 = {class: 'login-icon'} ## Unable to find a good page element locator.  Ask dev to add an id to the h2 tag
 
-  def initialize(browser)
+  def initialize(driver)
     super
-    @selenium_driver = @browser.driver
+    @driver = driver
     visit(page_half_url)
-    @browser.wait_until(30, 'Timed out!Unable to get to Login page!') {@selenium_driver.find_element(SIGN_IN_H2).displayed?}
+    wait_for(30) { is_displayed? SIGN_IN_H2 }
   end
 
   def page_half_url
-    #TODO: set domain name in ENV variable
     '/sso/Account/Logon'
   end
 
-  # def visit
-  #   @browser.goto(page_url)
-  # end
-
-  def login(email = 'midori@springahead.com', password = 'Gomidogogo7711')
-    #TODO: Move valid user account to account yml file
-    #TODO: Need think about how we can ensure the account exists?
-
+  def with(email, password)
+    @email = email
+    @password = password
     type(email, USERNAME_INPUT)
-    @selenium_driver.find_element(PASSWORD_INPUT).set password
-    @selenium_driver.find_element(SUBMIT_BUTTON).click
+    type(password, PASSWORD_INPUT)
+    submit SUBMIT_BUTTON
   end
 
+  def with_valid_credentials
+    #@tallie_enterprise_account = TallieEnterpriseAccount.new
+    with(@tallie_enterprise_account.default_employee_email, @tallie_enterprise_account.default_employee_password)
+  end
 end
