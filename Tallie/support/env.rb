@@ -12,7 +12,11 @@ Before do
   @driver = driver
 end
 
-at_exit do
-  #@driver.close
+After do
   driver.quit
 end
+# at_exit do
+#   #@driver.close
+#   driver.quit
+#   #BrowserUtilities.close_all_browsers
+# end

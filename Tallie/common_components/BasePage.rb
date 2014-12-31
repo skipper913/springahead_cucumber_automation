@@ -60,15 +60,20 @@ class BasePage
 
   def try_upto(times, second, condition, *params_to_condition)
     i = 0
+    condition_met = false
     params_to_condition.each do
       condition += " params_to_condition[#{i}]"
       i+= 1
     end
     1.upto(times) do
-      break if eval("#{condition}")
+      if eval("#{condition}")
+        condition_met = true
+        break
+      end
       yield
       sleep second
     end
+    return condition_met
   end
 
 

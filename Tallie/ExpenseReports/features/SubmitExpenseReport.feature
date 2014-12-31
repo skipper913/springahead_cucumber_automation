@@ -4,7 +4,8 @@ Feature: Create a Expense
 
   Scenario: Create a expense
 
-    Given I am on Purchases page
+    #Given I am logged in to Tallie
+    Given I go to Purchases page
     And I have a new expense tile opened -- expense
   And I submit Free Trial form
   #And I have a new expense tile opened

@@ -1,7 +1,7 @@
 @Tallie-login
 
-Feature: Verify Tallie Log in and Logout function
-  Scenario: Verify a user can log in to Tallie with valid login credentials
+Feature: Tallie: Login and Logout Test
+  Scenario: Verify login and logout function
     When I go to Login page
     And I log in with valid login credentials
     Then I see my name and enterprise displayed

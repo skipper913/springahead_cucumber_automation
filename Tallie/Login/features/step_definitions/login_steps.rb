@@ -1,4 +1,4 @@
-require_relative '../../../Purchases/PurchasesPage'
+require_relative '../../../Purchases/features/PurchasesPage'
 
 When /^I log in with valid login credentials$/ do
   @login_page = @tallie_page
@@ -19,16 +19,10 @@ Then /^I see my name and enterprise displayed$/ do
 end
 
 Given(/^I am logged in to Tallie$/) do
+  step %{I go to Login page}
   step %{I log in with valid login credentials}
 end
 
 When(/^I click Sign Out$/) do
   @tallie_page.sign_out
-end
-
-Then(/^I should be on (Login|Purchases) page$/) do |page|
-  page_obj = Object.const_get("#{page.gsub(" ", "")}Page").new(@driver)
-  page_url = page_obj.page_half_url
-  raise Exception, "You should be on #{page} page! You are on #{page_url}" unless @tallie_page.on_right_page? page_url
-
 end
