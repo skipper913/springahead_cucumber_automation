@@ -1,11 +1,16 @@
 
-module TopNav
+class TopNav < BasePage
   TOP_NAV_HEADER_ACCOUNT_NAME = {class: 'header-name'}
   TOP_NAV_HEADER_COMPANY = {class: 'header-company'}
   TOP_NAV_ARROW_BUTTON = {css: '.toggle-identity.toggle-header-dropdown.header-identity-hide'}  #TODO need an id
-  TOP_NAV_ARROW_BUTTON = {css: '.toggle-identity.toggle-header-dropdown.header-identity-hide'}
   TOP_NAV_SIGN_OUT = {class: 'identity-signout'}
   TOP_NAV_DROPDOWN = {id: 'identity-dropdown'}
+
+  def initialize(driver)
+    super
+    #@driver = driver
+    wait_for(30) { is_displayed? TOP_NAV_HEADER_ACCOUNT_NAME }
+  end
 
   def employee_name_displayed
     text(TOP_NAV_HEADER_ACCOUNT_NAME)

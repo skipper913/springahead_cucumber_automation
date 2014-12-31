@@ -1,4 +1,4 @@
-class PurchasesPage
+class ExpensePage
   def initialize(browser)
     @browser = browser
 

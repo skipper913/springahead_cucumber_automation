@@ -1,4 +1,3 @@
-
 class BasePage
   def initialize(driver)
     @driver = driver
@@ -53,7 +52,7 @@ class BasePage
 
   def on_right_page?(partial_url)
     1.upto(30) do
-        return true if @driver.current_url.downcase.include? partial_url.downcase
+      return true if @driver.current_url.downcase.include? partial_url.downcase
     end
     return false
   end
@@ -66,12 +65,16 @@ class BasePage
       i+= 1
     end
     1.upto(times) do
-      if eval("#{condition}")
-        condition_met = true
-        break
+      begin
+        if eval("#{condition}")
+          condition_met = true
+          break
+        end
+        yield
+        sleep second
+      rescue
+        yield
       end
-      yield
-      sleep second
     end
     return condition_met
   end

@@ -1,5 +1,4 @@
-class PurchasesPage < BasePage
-  include TopNav
+class PurchasesPage < TopNav
 
   ADD_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense.action-create-expense'} #TODO Need an id
   EXPENSE_POPUP = {id: 'expense'}
@@ -11,7 +10,6 @@ class PurchasesPage < BasePage
   def initialize(driver)
     super
     @driver = driver
-    visit(page_half_url)
     wait_for(30) { is_displayed? ADD_EXPENSE_BUTTON }
   end
 

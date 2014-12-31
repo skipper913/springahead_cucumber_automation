@@ -1,1 +1,9 @@
-.idea/*
+# RubyMine files
+.idea
+.bundle
+.config
+Cucumber/.idea/Cucumber.iml
+Cucumber/.idea/workspace.xml
+Cucumber/.idea/Cucumber.iml
+Cucumber/.idea/workspace.xml
+Cucumber/.idea/misc.xml
