@@ -1,4 +1,8 @@
+require_relative '../common_components/DriverHelper'
+
 class BasePage
+  include DriverHelper
+
   def initialize(driver)
     @driver = driver
   end
@@ -48,6 +52,10 @@ class BasePage
     else
       raise Exception, "Unknown options! options: #{options.inspect}"
     end
+  end
+
+  def select_list(text, locator)
+    Selenium::WebDriver::Support::Select.new(find(locator)).select_by(:text, text)
   end
 
   def on_right_page?(partial_url)
