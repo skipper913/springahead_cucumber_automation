@@ -1,4 +1,7 @@
+require_relative '../PurchasePageHelper'
+
 class PurchasesPage < TopNav
+  include PurchasePageHelper
 
   ADD_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense.action-create-expense'} #TODO Need an id
   EXPENSE_POPUP = {id: 'expense'}
@@ -11,8 +14,10 @@ class PurchasesPage < TopNav
   ## added expense
   EXPENSE_CONTAINER = {css: '.grid-expense-container'}
   MERCHANT_NAME = {css: '.merchant.title'}
-
-
+  ## Edit expense
+  EDIT_BUTTON = {css: '.bottom-action.sprite.edit'}
+  EXPENSE_DATE = {name: 'ExpenseDate'}
+  SAVE_BUTTON = {css: '#expense-form button[data-action=submit]'}
 
   def initialize(driver)
     super
@@ -24,22 +29,75 @@ class PurchasesPage < TopNav
     '/x9/Expense'
   end
 
-  def popup_field_locators
-    {'merchant' => MERCHANT_FIELD, 'category' => CATEGORY_TEXT_FIELD, 'reason' => REASON_FIELD, 'amount' => AMOUNT_FIELD}
-  end
-
   def display_create_expense_popup
     popup_displayed = try_upto(5, 0.5, 'is_displayed?', EXPENSE_POPUP) { click ADD_EXPENSE_BUTTON }
     raise Exception, "Failed to open a expense popup tile by clicking New Expense button" unless popup_displayed
   end
 
+  def popup_field_locators
+    {'merchant' => MERCHANT_FIELD, 'category' => CATEGORY_TEXT_FIELD, 'reason' => REASON_FIELD, 'amount' => AMOUNT_FIELD, 'date' => EXPENSE_DATE}
+  end
+
   def add_via_popup(fields = {})
     display_create_expense_popup
     unless fields.empty?
-      fields.each do |name, text|
-        name = name.downcase
-        locator = popup_field_locators[name]
-        if name.eql? 'category'
+      enter_expense_field(fields)
+      # fields.each do |name, text|
+      #   name = name.downcase
+      #   locator = popup_field_locators[name]
+      #   if name.eql? 'category'
+      #     click CATEGORY_TEXT_FIELD
+      #     wait_for(5) { is_exists? CATEGORY_LISTS }
+      #     categories = find_elements(CATEGORY_LISTS)
+      #     categories.each do |category|
+      #       if category.text.downcase.eql? text.downcase
+      #         category.click
+      #         break
+      #       end
+      #     end
+      #   else
+      #     type(text, locator)
+      #   end
+      # end
+    end
+    #sleep 3
+    click CREATE_BUTTON
+  end
+
+  def edit_any_expense(fields)
+    expense = expense_container[0]
+    open_edit_expense_popup(expense)
+    enter_expense_field(fields, false)
+    # fields.each do |name, text|
+    #   name = name.downcase
+    #   locator = popup_field_locators[name]
+    #   case name
+    #     when 'category'
+    #       click CATEGORY_TEXT_FIELD
+    #       wait_for(5) { is_exists? CATEGORY_LISTS }
+    #       categories = find_elements(CATEGORY_LISTS)
+    #       categories.each do |category|
+    #         if category.text.downcase.eql? text.downcase
+    #           category.click
+    #           break
+    #         end
+    #       end
+    #     else
+    #       fld = find(locator)
+    #       fld.clear
+    #       fld.send_keys text
+    #   end
+    # end
+    #sleep 3
+    click SAVE_BUTTON
+  end
+
+  def enter_expense_field(fields, add_mode = true)
+    fields.each do |name, text|
+      name = name.downcase
+      locator = popup_field_locators[name]
+      case name
+        when 'category'
           click CATEGORY_TEXT_FIELD
           wait_for(5) { is_exists? CATEGORY_LISTS }
           categories = find_elements(CATEGORY_LISTS)
@@ -50,12 +108,26 @@ class PurchasesPage < TopNav
             end
           end
         else
-          type(text, locator)
-        end
+          fld = find(locator)
+          fld.clear unless add_mode
+          fld.send_keys text
       end
+      sleep 0.5
     end
     sleep 3
-    click CREATE_BUTTON
+  end
+
+  def open_edit_expense_popup(expense)
+    popup_displayed = try_upto(5, 0.5, 'is_displayed?', EXPENSE_POPUP) { find(EDIT_BUTTON, expense).click }
+    raise Exception, "Failed to open a expense popup tile by clicking edit expense button" unless popup_displayed
+  end
+
+  def expense_container
+    find_elements(EXPENSE_CONTAINER)
+  end
+
+  def number_of_expenses
+    expense_container.size
   end
 
   def should_have_expense(field_value = {})
@@ -64,9 +136,8 @@ class PurchasesPage < TopNav
 
   def have_expense?(field_value = {})
     raise Exception, "field_value should be in hash: {'merchant' => 'Cucumber Auto', 'category' => 'AirFare',...}" unless field_value.class == Hash
-    found = false
     sleep 3
-    find_elements(EXPENSE_CONTAINER).each do |expense|
+    expense_container.each do |expense|
       match = true
       displayed = expense.text.downcase
       puts "displayed: #{displayed}"

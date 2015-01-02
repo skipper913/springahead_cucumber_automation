@@ -8,7 +8,7 @@ class LoginPage < BasePage
   def initialize(driver)
     super
     @driver = driver
-    visit(page_half_url)
+    #visit(page_half_url)
     wait_for(30) { is_displayed? SIGN_IN_H2 }
   end
 
@@ -16,7 +16,7 @@ class LoginPage < BasePage
     '/sso/Account/Logon'
   end
 
-  def with(email, password)
+  def login_with(email, password)
     @email = email
     @password = password
     type(email, USERNAME_INPUT)
@@ -25,8 +25,7 @@ class LoginPage < BasePage
   end
 
   def with_valid_credentials
-    #@tallie_enterprise_account = TallieEnterpriseAccount.new
-    with(@tallie_enterprise_account.default_employee_email, @tallie_enterprise_account.default_employee_password)
+    login_with(@tallie_enterprise_account.default_employee_email, @tallie_enterprise_account.default_employee_password)
   end
 
 end

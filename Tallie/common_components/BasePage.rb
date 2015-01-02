@@ -1,19 +1,23 @@
-require_relative '../common_components/DriverHelper'
+require_relative '../common_components/BasePageHelper'
 
 class BasePage
-  include DriverHelper
+  include BasePageHelper
 
   def initialize(driver)
     @driver = driver
   end
 
-  def visit(url_path)
-    @driver.get ENV['base_url'] + url_path
+  def page_url
+    ENV['base_url']
+  end
+
+  def visit(url_path = nil)
+    @driver.get page_url + url_path
     #@driver.goto(ENV['base_url'] + url_path)
   end
 
-  def find(locator)
-    @driver.find_element locator
+  def find(locator, driver = @driver)
+    driver.find_element locator
   end
 
   def find_elements(locator)
@@ -72,9 +76,13 @@ class BasePage
     Selenium::WebDriver::Support::Select.new(find(locator)).select_by(:text, text)
   end
 
+  def current_url
+    @driver.current_url
+  end
+
   def on_right_page?(partial_url)
     1.upto(30) do
-      return true if @driver.current_url.downcase.include? partial_url.downcase
+      return true if current_url.downcase.include? partial_url.downcase
     end
     return false
   end

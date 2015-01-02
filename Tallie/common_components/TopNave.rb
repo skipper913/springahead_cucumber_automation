@@ -3,12 +3,12 @@ class TopNav < BasePage
   TOP_NAV_HEADER_ACCOUNT_NAME = {class: 'header-name'}
   TOP_NAV_HEADER_COMPANY = {class: 'header-company'}
   TOP_NAV_ARROW_BUTTON = {css: '.toggle-identity.toggle-header-dropdown.header-identity-hide'}  #TODO need an id
-  TOP_NAV_SIGN_OUT = {class: 'identity-signout'}
+  TOP_NAV_SIGN_OUT = {link_text: 'Sign Out'} #TODO:** use other attribute to locate.
   TOP_NAV_DROPDOWN = {id: 'identity-dropdown'}
 
   def initialize(driver)
     super
-    #@driver = driver
+    @driver = driver
     wait_for(30) { is_displayed? TOP_NAV_HEADER_ACCOUNT_NAME }
   end
 

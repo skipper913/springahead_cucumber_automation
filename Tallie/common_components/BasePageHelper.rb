@@ -1,5 +1,10 @@
 
-module DriverHelper
+module BasePageHelper
+  def any_past_date()
+    date = DateTime.now - rand(10...760)
+    date.strftime('%-m/%-d/%Y')
+  end
+
 
   # def highlight(locator, ancestors=0)
   #   element = find(locator)
