@@ -28,4 +28,5 @@ class LoginPage < BasePage
     #@tallie_enterprise_account = TallieEnterpriseAccount.new
     with(@tallie_enterprise_account.default_employee_email, @tallie_enterprise_account.default_employee_password)
   end
+
 end

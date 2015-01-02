@@ -9,10 +9,15 @@ class BasePage
 
   def visit(url_path)
     @driver.get ENV['base_url'] + url_path
+    #@driver.goto(ENV['base_url'] + url_path)
   end
 
   def find(locator)
     @driver.find_element locator
+  end
+
+  def find_elements(locator)
+    @driver.find_elements locator
   end
 
   def type(text, locator)
@@ -28,7 +33,16 @@ class BasePage
   end
 
   def is_displayed?(locator)
-    find(locator).displayed?
+    elements = find_elements(locator)
+    if elements.size > 0
+      elements[0].displayed?
+    else
+      false
+    end
+  end
+
+  def is_exists?(locator)
+    find_elements(locator).size > 0
   end
 
   def wait_for(seconds = 15)

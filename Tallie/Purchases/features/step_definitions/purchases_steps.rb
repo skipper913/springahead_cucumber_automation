@@ -14,13 +14,12 @@ When(/^I add a new expense with below data by clicking New Expense button:$/) do
   if @added_expense_attributes['amount'].downcase.include? 'auto-generate amount'
     @added_expense_attributes['amount'] = '%.2f' % (rand * 100)
   end
-
-  puts "@added_expense_attributes: #{@added_expense_attributes.inspect}"
   @purchases_page.add_via_popup(@added_expense_attributes)
-
+  @added_expense_attributes['date'] = DateTime.now.strftime('%-m/%-d/%Y')
+  puts "@added_expense_attributes: #{@added_expense_attributes.inspect}"
 end
 
 Then(/^the new expense tile is added on the page$/) do
   @added_expense_attributes
-  @purchases_page.have_expense(@added_expense_attributes)
+  @purchases_page.should_have_expense(@added_expense_attributes)
 end

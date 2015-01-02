@@ -149,7 +149,6 @@
     <orderEntry type="library" scope="PROVIDED" name="multi_test (v0.1.1, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v1.1.6, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v2.44.0, ruby-2.0.0-p481) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="watir-webdriver (v0.6.11, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.1, ruby-2.0.0-p481) [gem]" level="application" />
   </component>
 </module>
