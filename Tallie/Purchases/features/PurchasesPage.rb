@@ -17,7 +17,7 @@ class PurchasesPage < TopNav
   EDIT_BUTTON = {css: '.bottom-action.sprite.edit'}
   MERCHANT_NAME = {css: '.merchant.title'}
   EXPENSE_DATE = {css: '.date_input'}
-  SAVE_BUTTON = {css: '.modal-body button[data-action=submit]'}
+  SAVE_BUTTON = {css: '#expense-form button[data-action=submit]'}
   ITEMIZE_LINK = {css: '.btn-itemize'}
   ADD_NEW_ITEM_LINK = {css: '.item-add-btn'}
   BILLABLE_CHECKBOX = {id:'billable'}
@@ -27,6 +27,7 @@ class PurchasesPage < TopNav
   REASON_FIELD_ITEMIZATION = {id: 'Itemizations_0__Text'}
   AMOUNT_FIELD_ITEMIZATION = {id: 'Itemizations_0__Amount'}
   CLOSE_ITEM_VIEW = {css: '.btn.btn-link.view-toggle'}
+  SAVE_BUTTON_ITEMIZATION = {css: '.modal-body button[data-action=submit]'}
 
   def initialize(driver)
     super
@@ -46,6 +47,11 @@ class PurchasesPage < TopNav
   def display_edit_expense_popup(expense)
     popup_displayed = try_upto(5, 0.5, 'is_displayed?', EXPENSE_POPUP) { find(EDIT_BUTTON, expense).click }
     raise Exception, "Failed to open a expense popup tile by clicking edit expense button" unless popup_displayed
+  end
+
+  def close_item_view
+    close_view = try_upto(5, 0.5, '!is_displayed?', REASON_FIELD_ITEMIZATION) {click CLOSE_ITEM_VIEW }
+    raise Exception, "Failed to close itemize view" unless close_view
   end
 
   def display_itemization_popup
@@ -84,12 +90,15 @@ class PurchasesPage < TopNav
     display_edit_expense_popup(expense)
     display_itemization_popup
     num_of_item_to_add = itemizes.size
-    itemizes.each_value do |attributes|
+    total_amount = 0
+    itemizes.each_value do |item|
       num_of_item_to_add -= 1
-      enter_expense_field(attributes, false)
+      enter_expense_field(item, false)
+      total_amount += item['amount_itemize'].to_f if item.has_key?('amount_itemize')
       click ADD_NEW_ITEM_LINK if num_of_item_to_add > 0
     end
     sleep 1
+    type(total_amount, AMOUNT_FIELD)
     click SAVE_BUTTON
   end
 
@@ -117,8 +126,10 @@ class PurchasesPage < TopNav
       sleep 0.5
     end
     #click TITLE_ITEMIZATION
-    click CLOSE_ITEM_VIEW
     sleep 3
+    #click TITLE_ITEMIZATION
+    #close_item_view
+    #sleep 3
   end
 
   def expense_container
