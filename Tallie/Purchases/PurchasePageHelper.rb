@@ -10,7 +10,7 @@ module PurchasePageHelper
   end
 
   def auto_generate_amount
-    '%.2f' % (rand * 100)
+    '%.2f' % (rand * 1000)
   end
 
 end

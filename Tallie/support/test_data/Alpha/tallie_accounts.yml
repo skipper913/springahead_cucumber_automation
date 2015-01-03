@@ -3,8 +3,8 @@ DefaulEnterprise:
   Employees:
     DefaultEmployee:
       Name: 'Alpha Test'
-      Email: 'midori+alpha@springahead.com'
-      Password: 'Gomidogogo7711'
+      Email: 'midori+auto1@springahead.com'
+      Password: 'Takarazuka'
 
 ApprovarTestEnterprise:
   Name: 'Approver Go Go'
@@ -12,11 +12,11 @@ ApprovarTestEnterprise:
     DefaultEmployee:
       Name: 'Midori Wasada'
       Email: 'midori+alpha@springahead.com'
-      Password: 'Gomidogogo7711'
+      Password: 'Takarazuka123'
     GlovalApprover:
       Name: 'Maho Wasada'
       Email: 'midori+alpha1@springahead.com'
-      Password: 'Gomidogogo7711'
+      Password: 'Takarazuka333'
 
 
 

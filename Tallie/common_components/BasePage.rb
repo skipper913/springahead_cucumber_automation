@@ -58,8 +58,9 @@ class BasePage
   end
 
   def see_text?(text, locator = nil, *options)
+    text = text.downcase
     if locator.nil?
-      text_displayed = @driver.text
+      text_displayed = @driver.text.downcase
     else
       text_displayed = text(locator)
     end
@@ -104,6 +105,7 @@ class BasePage
         sleep second
       rescue
         yield
+        sleep second
       end
     end
     return condition_met
