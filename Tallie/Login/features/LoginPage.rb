@@ -8,12 +8,12 @@ class LoginPage < BasePage
   def initialize(driver)
     super
     @driver = driver
-    #visit(page_half_url)
+    visit(page_half_url) unless on_right_page? page_half_url
     wait_for(30) { is_displayed? SIGN_IN_H2 }
   end
 
   def page_half_url
-    '/sso/Account/Logon'
+    '/sso/account/logon'
   end
 
   def login_with(email, password)

@@ -1,4 +1,5 @@
 require_relative '../PurchasePageHelper'
+require_relative '../features/PurchasePageHelperCreditCard'
 
 class PurchasesPage < TopNav
   include PurchasePageHelper
@@ -31,15 +32,19 @@ class PurchasesPage < TopNav
   CLOSE_ITEM_VIEW = {css: '.btn.btn-link.view-toggle'}
   SAVE_BUTTON_ITEMIZATION = {css: '.modal-body button[data-action=submit]'}
 
+  include PurchasePageHelperCreditCard
+
   def initialize(driver)
     super
     @driver = driver
+    visit page_half_url unless on_right_page? page_half_url
     wait_for(30) { is_displayed? ADD_EXPENSE_BUTTON }
   end
 
   def page_half_url
     '/x9/Expense'
   end
+
 
   def display_create_expense_popup
     popup_displayed = try_upto(5, 0.5, 'is_displayed?', EXPENSE_POPUP) { click ADD_EXPENSE_BUTTON }

@@ -1,17 +1,23 @@
 login_page_half_url = '/sso/Account/Logon'
 Given /^I (am on|go to) Login page$/ do |temp|
-  @tallie_page = BasePage.new(@driver)
-  @tallie_page.visit(login_page_half_url)
+  #@tallie_page = BasePage.new(@driver)
+  #@tallie_page.visit(login_page_half_url)
   @login_page = LoginPage.new(@driver)
   @tallie_page = @login_page
 end
 
 Then(/^I should be on Login page$/) do
-  begin
-    LoginPage.new(@driver)
-  rescue
-    raise Exception, "You should be on Login page! You are on #{@tallie_page.current_url}"
+
+  on_right_page = false
+  if @tallie_page.class == Login
+    on_right_page = true if @tallie_page.current_url.downcase.eql? @tallie_page.page_half_url
   end
+  raise Exception, "You should be on Login page, but you are on #{@tallie_page.current_url}" unless on_right_page
+  # begin
+  #   LoginPage.new(@driver)
+  # rescue
+  #   raise Exception, "You should be on Login page! You are on #{@tallie_page.current_url}"
+  # end
 end
 
 
