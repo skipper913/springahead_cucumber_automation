@@ -2,8 +2,6 @@
 .idea
 .bundle
 .config
-Cucumber/.idea/Cucumber.iml
-Cucumber/.idea/workspace.xml
-Cucumber/.idea/Cucumber.iml
-Cucumber/.idea/workspace.xml
-Cucumber/.idea/misc.xml
+.idea/Cucumber.iml
+.idea/workspace.xml
+.idea/misc.xml
