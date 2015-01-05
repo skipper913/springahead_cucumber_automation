@@ -33,7 +33,7 @@ end
 
 When(/^I add below itemizations to an expense:$/) do |table|
   ##TODO: Need to create expense (via db query, RestAPI, etc)
-  step %q{I add a new expense with below data by clicking New Expense button:} if @purchases_page.number_of_expenses == 0
+  @purchases_page.add_via_popup if @purchases_page.find_expense_with_no_item.nil?
   @itemized_expense_attributes = table.rows_hash
   @itemized_expense_attributes = @itemized_expense_attributes.each do |item, attributes|
     @itemized_expense_attributes[item] = eval(attributes)
@@ -41,6 +41,11 @@ When(/^I add below itemizations to an expense:$/) do |table|
   end
   @purchases_page.add_item_to_any_expense_with_no_item(@itemized_expense_attributes)
 end
+
+Then(/^I delete all Purchases$/) do
+  @purchases_page.delete_all_purchases
+end
+
 
 def set_random_value_to_expense_attributes(attributes)
   if (attributes.has_key? 'merchant')
@@ -56,8 +61,11 @@ def set_random_value_to_expense_attributes(attributes)
     attributes['amount'] = @purchases_page.auto_generate_amount if attributes['amount'].downcase.include? 'any'
   end
   if (attributes.has_key? 'amount_itemize')
-    attributes['amount_itemize'] = @purchases_page.auto_generate_amount if attributes['amount_itemize'].downcase.include? 'any'
+    if attributes['amount_itemize'].class == 'String'
+      attributes['amount_itemize'] = @purchases_page.auto_generate_amount if attributes['amount_itemize'].downcase.include? 'any'
+    end
   end
   attributes['date'] = @purchases_page.any_past_date
   return attributes
 end
+
