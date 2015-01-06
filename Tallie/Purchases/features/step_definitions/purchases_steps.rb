@@ -60,8 +60,8 @@ def set_random_value_to_expense_attributes(attributes)
   if attributes.has_key? 'amount'
     attributes['amount'] = @purchases_page.auto_generate_amount if attributes['amount'].downcase.include? 'any'
   end
-  if (attributes.has_key? 'amount_itemize')
-    if attributes['amount_itemize'].class == 'String'
+  if attributes.has_key? 'amount_itemize'
+    if attributes['amount_itemize'].class == String
       attributes['amount_itemize'] = @purchases_page.auto_generate_amount if attributes['amount_itemize'].downcase.include? 'any'
     end
   end

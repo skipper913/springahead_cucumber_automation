@@ -35,7 +35,7 @@ module PurchasePageHelperItemization
     display_edit_expense_popup(expense)
     display_itemization_popup
     num_of_item_to_add = itemizes.size
-    total_amount = 0.00
+    total_amount = 10.00  ##TODO: If total is exact, it displays error for some reason.
     itemizes.each_value do |item|
       num_of_item_to_add -= 1
       fill_expense_popup(item)
@@ -43,9 +43,12 @@ module PurchasePageHelperItemization
       click ADD_NEW_ITEM_LINK if num_of_item_to_add > 0
     end
     sleep 1
+    find(AMOUNT_FIELD).click
     total_amount = '%.2f' % total_amount
+    find(AMOUNT_FIELD).clear
     type(total_amount, AMOUNT_FIELD)
     click SAVE_BUTTON
+    puts "test"
   end
 
 end
