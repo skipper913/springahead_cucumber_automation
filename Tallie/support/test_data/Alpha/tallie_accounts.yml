@@ -1,8 +1,8 @@
 DefaulEnterprise:
-  Name: 'Fiesta Go Go'
+  Name: 'Takarazuka'
   Employees:
     DefaultEmployee:
-      Name: 'Alpha Test'
+      Name: 'Auto1 Test'
       Email: 'midori+auto1@springahead.com'
       Password: 'Takarazuka'
 

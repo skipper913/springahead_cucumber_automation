@@ -1,4 +1,4 @@
-@Tallie-Purchases-Delete
+@Tallie-Purchases
 
 Feature: Tallie: Delete Purchases
 

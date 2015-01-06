@@ -8,11 +8,13 @@ end
 
 Then(/^I should be on Login page$/) do
 
-  on_right_page = false
-  if @tallie_page.class == Login
-    on_right_page = true if @tallie_page.current_url.downcase.eql? @tallie_page.page_half_url
-  end
-  raise Exception, "You should be on Login page, but you are on #{@tallie_page.current_url}" unless on_right_page
+  LoginPage.new(@driver)
+
+  # on_right_page = false
+  # if @tallie_page.class == LoginPage
+  #   on_right_page = true if @tallie_page.current_url.downcase.eql? @tallie_page.page_half_url
+  # end
+  # raise Exception, "You should be on Login page, but you are on #{@tallie_page.current_url}" unless on_right_page
   # begin
   #   LoginPage.new(@driver)
   # rescue

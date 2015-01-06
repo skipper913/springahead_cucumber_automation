@@ -1,5 +1,6 @@
-#require_relative '../PurchasePageHelper'
-#require_relative '../features/PurchasePageHelperCreditCard'
+# require_relative '../features/PurchasePageHelper'
+# require_relative '../features/PurchasePageHelperCreditCard'
+# require_relative '../features/PurchasePageHelperItemization'
 
 class PurchasesPage < TopNav
   include PurchasePageHelper

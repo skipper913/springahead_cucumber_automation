@@ -1,3 +1,4 @@
+
 module CreditCardPageHelperDelete
   DELETE_ICON = {css: '.cc-action.cc-delete'}
 

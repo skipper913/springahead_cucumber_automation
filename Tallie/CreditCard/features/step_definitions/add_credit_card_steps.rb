@@ -1,7 +1,11 @@
 require_relative '../../../Login/features/step_definitions/login_steps'
 require_relative '../../../Login/features/LoginPage'
-require_relative '../../../Purchases/features/step_definitions/import_cc_steps'
-require_relative '../../../Purchases/features/PurchasesPage'
+
+#require_relative '../../../Purchases/features/pages/PurchasesPage'
+
+
+#Dir["../../../Purchases/features/pages/*.rb"].each { |file| load file }
+#require_relative '../../../Purchases/features/step_definitions/import_cc_steps'
 
 Given /^I (am on|go to) Credit Card page$/ do |temp|
   step %q{I am logged in to Tallie} #TODO need to bypass login and go to purchases page
@@ -19,6 +23,6 @@ And(/^I should see (Test Bank|DagBank) Credit Card added on the page$/) do |bank
   @cc_bank_name_added = bank_name
 end
 
-And(/^I delete all Credit Card added$/) do
-  @cc_page.delete_all
-end
+# And(/^I delete all Credit Card added$/) do
+#   @cc_page.delete_all
+# end

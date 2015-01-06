@@ -1,4 +1,4 @@
-require_relative '../features/CreditCardPageHelperDelete'
+#require_relative 'CreditCardPageHelperDelete'
 
 class CreditCardPage < TopNav
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}
@@ -12,7 +12,7 @@ class CreditCardPage < TopNav
   CC_LIST = {id: 'cc-list'}
   CCS = {class: 'cc'}
 
-  include CreditCardPageHelperDelete
+  #include CreditCardPageHelperDelete
 
   def initialize(driver)
     super
@@ -25,6 +25,33 @@ class CreditCardPage < TopNav
   def page_half_url
     '/x9/BankAccount'
   end
+
+  #######
+
+  DELETE_ICON = {css: '.cc-action.cc-delete'}
+
+  def delete_all
+    stop = false
+    max_try = 5
+    count = 0
+    unless (stop or count > max_try)
+      count += 1
+      delete_icons.each do |icon|
+        icon.click
+        sleep 3
+      end
+      number_of_delete_icons_left = delete_icons.length
+      puts "number_of_delete_icons_left: #{number_of_delete_icons_left}"
+      stop = true if number_of_delete_icons_left == 0
+    end
+  end
+
+  def delete_icons
+    find_elements DELETE_ICON
+  end
+  ######
+
+
 
   ## TODO: need to store cc info in test data to switch default CC
   def add_cc(bank_name = 'dagbank', login = 'cc.bank4', password = 'bank4')
