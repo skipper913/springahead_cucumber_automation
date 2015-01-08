@@ -1,5 +1,7 @@
 #require_relative 'CreditCardPageHelperDelete'
 
+puts "IN  CreditCardPage"
+
 class CreditCardPage < TopNav
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}
   CC_LIGHTBOX = {id: 'cc-account-lightbox'}
