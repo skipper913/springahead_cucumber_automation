@@ -3,7 +3,13 @@ Before do
   LOADED_TALLIE_ACCOUNTS = YAML.load_file("../support/test_data/#{ENV['env']}/tallie_accounts.yml")
 end
 
-Before('@Tallie-CreditCard-Add, @Tallie-CreditCard-Delete') do
+Before('@Tallie-CreditCard, @Tallie-Purchases') do
+  ##TODO: Remove login steps if we can bypass login
+  require_relative '../Login/features/step_definitions/login_steps'
+  require_relative '../Login/features/pages/LoginPage'
+end
+
+Before('@Tallie-CreditCard') do
   Dir["../Purchases/features/pages/*.rb"].each { |file|
     load file
     puts "** file: #{file}"
@@ -12,7 +18,7 @@ Before('@Tallie-CreditCard-Add, @Tallie-CreditCard-Delete') do
 end
 
 # Before('@Tallie-Purchases') do
-#   Dir["../Purchases/features/pages/*.rb"].each { |file|
+#   Dir["../Purchases/features/page_helpers/*.rb"].each { |file|
 #     load file
 #     puts "** file: #{file}"
 #   }

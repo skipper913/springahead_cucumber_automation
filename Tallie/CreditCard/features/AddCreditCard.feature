@@ -1,4 +1,4 @@
-@Tallie-CreditCard-Add
+@Tallie-CreditCard
 
 Feature: Tallie: Add Credit Card
 
@@ -8,3 +8,4 @@ Feature: Tallie: Add Credit Card
     Then I should see DagBank Credit Card added on the page
     And I should see the credit card account listed in the credit card list on Purchase page
     Then I stopped
+

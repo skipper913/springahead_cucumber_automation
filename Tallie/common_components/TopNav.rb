@@ -1,14 +1,17 @@
+require_relative '../common_components/browser_actions'
 
-class TopNav < BasePage
+class TopNav
   TOP_NAV_HEADER_ACCOUNT_NAME = {class: 'header-name'}
   TOP_NAV_HEADER_COMPANY = {class: 'header-company'}
   TOP_NAV_ARROW_BUTTON = {css: '.toggle-identity.toggle-header-dropdown.header-identity-hide'}  #TODO need an id
   TOP_NAV_SIGN_OUT = {link_text: 'Sign Out'} #TODO:** use other attribute to locate.
   TOP_NAV_DROPDOWN = {id: 'identity-dropdown'}
 
+  include BrowserActions
+
   def initialize(driver)
-    super
     @driver = driver
+    super(@driver)
     wait_for(30) { is_displayed? TOP_NAV_HEADER_ACCOUNT_NAME }
   end
 
@@ -35,8 +38,7 @@ class TopNav < BasePage
   def sign_out
     try_upto(5, 0.5, "is_displayed?", TOP_NAV_DROPDOWN) {click TOP_NAV_ARROW_BUTTON}
     try_upto(3, 0.5, "!is_displayed?", TOP_NAV_DROPDOWN) {click TOP_NAV_SIGN_OUT}
-   #   click TOP_NAV_SIGN_OUT
+    #   click TOP_NAV_SIGN_OUT
   end
-
 
 end

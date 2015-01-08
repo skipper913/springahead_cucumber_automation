@@ -1,15 +1,13 @@
 class FreeTrialPage
-  def initialize(browser)
-    @browser = browser
+  def initialize(driver)
+    @driver = driver
 
   end
 
-  def page_url
-    #TODO: set domain name in ENV variable
-    'https://alpha-springaheadgo.com/free-trial-begin-expense-reports'
-  end
-  def visit
-    @browser.goto(page_url)
-  end
+  # def page_url
+  #
+  #   'https://alpha-springaheadgo.com/free-trial-begin-expense-reports'
+  # end
+
 
 end

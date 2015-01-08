@@ -1,8 +1,7 @@
-require_relative '../../PageHelper/CreditCardPageHelperDelete'
 
-puts "IN  CreditCardPage"
+require_relative '../../page_helpers/CreditCardPageHelperDelete'
 
-class CreditCardPage < TopNav
+class CreditCardPage < BasePage
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}
   CC_LIGHTBOX = {id: 'cc-account-lightbox'}
   BANK_NAME = {id: 'bank-name'}
@@ -17,43 +16,19 @@ class CreditCardPage < TopNav
   include CreditCardPageHelperDelete
 
   def initialize(driver)
-    super
     @driver = driver
-    visit page_half_url
-    wait_for(30) { is_displayed? ADD_CREDIT_CARD }
+    @url_path = '/x9/bankaccount'
+
+    super(driver, @url_path, ADD_CREDIT_CARD)
+   # url_path = '/x9/BankAccount'
+    # visit page_half_url
+    # wait_for(30) { is_displayed? ADD_CREDIT_CARD }
     @num_of_cc_before_add = 0
   end
 
-  def page_half_url
-    '/x9/BankAccount'
-  end
-
-  # #######
-  #
-  # DELETE_ICON = {css: '.cc-action.cc-delete'}
-  #
-  # def delete_all
-  #   stop = false
-  #   max_try = 5
-  #   count = 0
-  #   unless (stop or count > max_try)
-  #     count += 1
-  #     delete_icons.each do |icon|
-  #       icon.click
-  #       sleep 3
-  #     end
-  #     number_of_delete_icons_left = delete_icons.length
-  #     puts "number_of_delete_icons_left: #{number_of_delete_icons_left}"
-  #     stop = true if number_of_delete_icons_left == 0
-  #   end
+  # def page_half_url
+  #   '/x9/BankAccount'
   # end
-  #
-  # def delete_icons
-  #   find_elements DELETE_ICON
-  # end
-  # ######
-
-
 
   ## TODO: need to store cc info in test data to switch default CC
   def add_cc(bank_name = 'dagbank', login = 'cc.bank4', password = 'bank4')
@@ -118,7 +93,6 @@ class CreditCardPage < TopNav
   end
 
   def num_of_cc_increased_by_one
-    puts "trying to see number of cc!!"
     (ccs.size - @num_of_cc_before_add) == 1
   end
 

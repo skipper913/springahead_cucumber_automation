@@ -1,8 +1,17 @@
 # require_relative '../features/PurchasePageHelper'
 # require_relative '../features/PurchasePageHelperCreditCard'
+
 # require_relative '../features/PurchasePageHelperItemization'
 
-class PurchasesPage < TopNav
+puts "IN PURCHASE PAGE before loading pages!"
+Dir["../Purchases/page_helpers/*.rb"].each { |file|
+  load file
+  puts "** file: #{file}"
+}
+
+#require_relative '../../page_helpers/PurchasePageHelper'
+
+class PurchasesPage < BasePage
   include PurchasePageHelper
 
   ADD_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense.action-create-expense'} #TODO Need an id
@@ -27,17 +36,20 @@ class PurchasesPage < TopNav
   include PurchasePageHelperCreditCard
   include PurchasePageHelperItemization
   include PurchasePageHelperDelete
+  #include TopNav
 
   def initialize(driver)
-    super
     @driver = driver
-    visit page_half_url unless on_right_page? page_half_url
-    wait_for(30) { is_displayed? ADD_EXPENSE_BUTTON }
+    @url_path = '/x9/expense'
+
+    super(driver, @url_path, ADD_EXPENSE_BUTTON)
+    #visit page_half_url unless on_right_page? page_half_url
+    #wait_for(30) { is_displayed? ADD_EXPENSE_BUTTON }
   end
 
-  def page_half_url
-    '/x9/Expense'
-  end
+  # def page_half_url
+  #   '/x9/Expense'
+  # end
 
 
   def display_create_expense_popup

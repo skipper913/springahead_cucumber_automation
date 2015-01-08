@@ -1,4 +1,4 @@
-@Tallie-CreditCard-Delete
+@Tallie-CreditCard
 
 Feature: Tallie: Delete CC
 
