@@ -17,21 +17,18 @@ class CreditCardPage < BasePage
 
   def initialize(driver)
     @driver = driver
-    @url_path = '/x9/bankaccount'
-
+    @url_path = page_half_url.downcase
     super(driver, @url_path, ADD_CREDIT_CARD)
-   # url_path = '/x9/BankAccount'
-    # visit page_half_url
-    # wait_for(30) { is_displayed? ADD_CREDIT_CARD }
     @num_of_cc_before_add = 0
   end
 
-  # def page_half_url
-  #   '/x9/BankAccount'
-  # end
+  def page_half_url
+    '/x9/BankAccount'
+  end
 
   ## TODO: need to store cc info in test data to switch default CC
-  def add_cc(bank_name = 'dagbank', login = 'cc.bank4', password = 'bank4')
+  ## TODO How do we assure that bank5 always exists?
+  def add_cc(bank_name = 'dagbank', login = 'cc.bank5', password = 'bank5')
     @num_of_cc_before_add = ccs.size
     bank_name = bank_name.downcase
     click ADD_CREDIT_CARD
@@ -69,12 +66,11 @@ class CreditCardPage < BasePage
     click CONTINUE_BUTTON
     wait_for(30) {is_displayed? CCS}
   end
+
   def select_bank(bank_name)
     type(bank_name, BANK_NAME)
     sleep 1
     type(:left, BANK_NAME)
-  #  type(:down, BANK_NAME)
-   # type(:return, BANK_NAME)
     1.upto(2) do
       begin
         type(:down, BANK_NAME)
@@ -103,6 +99,5 @@ class CreditCardPage < BasePage
     end
     return false
   end
-
 
 end

@@ -20,7 +20,9 @@ class BasePage
   # end
 
   def visit
-    @driver.get @base_page_url + @url_path
+    url = @base_page_url + @url_path
+    @driver.get url unless current_url.eql? url
+    #@driver.get @base_page_url + @url_path
     on_page
     #@driver.goto(ENV['base_url'] + url_path)
   end
