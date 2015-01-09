@@ -1,4 +1,4 @@
-@Tallie-Purchases
+@Tallie-purchases
 
 Feature: Tallie: Itemize Expense
 

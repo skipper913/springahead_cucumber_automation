@@ -1,5 +1,5 @@
 
-require_relative '../../page_helpers/CreditCardPageHelperDelete'
+require_relative '../../page_helpers/credit_card_page_helper_delete'
 
 class CreditCardPage < BasePage
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}

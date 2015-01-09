@@ -1,5 +1,5 @@
 
-module PurchasePageHelperDelete
+module PurchasesPageHelperDelete
   DELETE_ICON = {css: '.bottom-action.sprite.delete'}
   def delete_all_purchases
     stop = false

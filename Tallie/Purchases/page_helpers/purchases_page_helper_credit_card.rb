@@ -1,5 +1,4 @@
-module PurchasePageHelperCreditCard
-  ## CC
+module PurchasesPageHelperCreditCard
   IMPORT_CC_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense-cc.action-create-ccitem'}
   TRANSACTION_MODAL = {id: 'transaction-modal'}
   CC_SELECT_LIST = {css: '.cc-brand-select.action-trigger-change'}

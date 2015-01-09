@@ -1,18 +1,18 @@
-# require_relative '../features/PurchasePageHelper'
+# require_relative '../features/PurchasesPageHelper'
 # require_relative '../features/PurchasePageHelperCreditCard'
 
 # require_relative '../features/PurchasePageHelperItemization'
 
 puts "IN PURCHASE PAGE before loading pages!"
-Dir["../Purchases/page_helpers/*.rb"].each { |file|
+Dir["../purchases/page_helpers/*.rb"].each { |file|
   load file
   puts "** file: #{file}"
 }
 
-#require_relative '../../page_helpers/PurchasePageHelper'
+#require_relative '../../page_helpers/PurchasesPageHelper'
 
 class PurchasesPage < BasePage
-  include PurchasePageHelper
+  include PurchasesPageHelper
 
   ADD_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense.action-create-expense'} #TODO Need an id
   EXPENSE_POPUP = {id: 'expense'}
@@ -33,9 +33,9 @@ class PurchasesPage < BasePage
 
   BILLABLE_CHECKBOX = {id: 'billable'}
 
-  include PurchasePageHelperCreditCard
-  include PurchasePageHelperItemization
-  include PurchasePageHelperDelete
+  include PurchasesPageHelperCreditCard
+  include PurchasesPageHelperItemization
+  include PurchasesPageHelperDelete
   #include TopNav
 
   def initialize(driver)
@@ -132,6 +132,7 @@ class PurchasesPage < BasePage
   end
 
   def should_have_expense(attribute_values)
+    #TODO-T1: Talk to dev about create/edit purchases. Sometimes a expense tile does not saved after clicking Create/Save button.
     raise Exception, "No expense found with #{attribute_values.inspect}!" unless have_expense? attribute_values
   end
 

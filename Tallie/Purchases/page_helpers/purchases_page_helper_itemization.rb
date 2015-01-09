@@ -1,6 +1,5 @@
 
-module PurchasePageHelperItemization
-  ## Itemization modal
+module PurchasesPageHelperItemization
   TITLE_ITEMIZATION = {css: '.modal-title.title'}
   REASON_FIELD_ITEMIZATION = {id: 'Itemizations_0__Text'}
   AMOUNT_FIELD_ITEMIZATION = {id: 'Itemizations_0__Amount'}

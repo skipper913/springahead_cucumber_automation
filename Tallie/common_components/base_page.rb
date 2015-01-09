@@ -1,4 +1,4 @@
-require_relative '../common_components/BasePageHelper'
+require_relative '../common_components/base_page_helper'
 require_relative '../common_components/browser_actions'
 
 class BasePage
