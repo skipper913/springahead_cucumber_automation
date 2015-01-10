@@ -1,15 +1,4 @@
-# require_relative '../features/PurchasesPageHelper'
-# require_relative '../features/PurchasePageHelperCreditCard'
-
-# require_relative '../features/PurchasePageHelperItemization'
-
-puts "IN PURCHASE PAGE before loading pages!"
-Dir["../purchases/page_helpers/*.rb"].each { |file|
-  load file
-  puts "** file: #{file}"
-}
-
-#require_relative '../../page_helpers/PurchasesPageHelper'
+FileUtilities.require_files_in_dir(FileUtilities.page_helpers_dir_absolute_path('purchases'))
 
 class PurchasesPage < BasePage
   include PurchasesPageHelper
@@ -36,21 +25,12 @@ class PurchasesPage < BasePage
   include PurchasesPageHelperCreditCard
   include PurchasesPageHelperItemization
   include PurchasesPageHelperDelete
-  #include TopNav
 
   def initialize(driver)
     @driver = driver
     @url_path = '/x9/expense'
-
     super(driver, @url_path, ADD_EXPENSE_BUTTON)
-    #visit page_half_url unless on_right_page? page_half_url
-    #wait_for(30) { is_displayed? ADD_EXPENSE_BUTTON }
   end
-
-  # def page_half_url
-  #   '/x9/Expense'
-  # end
-
 
   def display_create_expense_popup
     popup_displayed = try_upto(5, 0.5, 'is_displayed?', EXPENSE_POPUP) { click ADD_EXPENSE_BUTTON }
@@ -101,6 +81,9 @@ class PurchasesPage < BasePage
   end
 
   def select_category(text)
+    #TODO: if you have selected an expense which has itemize, you need to expand itemize to select category.
+    ## need to fix it. Create select_category for edit mode, and itemize?
+
     wait_for(5) {is_exists? CATEGORY_SEARCH_FIELD}
     click CATEGORY_SEARCH_FIELD
     wait_for(5) {(is_exists? CATEGORY_LIST_ITEMS) && (find(CATEGORY_SEARCH_FIELD).attribute('placeholder') != 'Searching')}

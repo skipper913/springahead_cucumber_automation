@@ -1,5 +1,4 @@
-
-require_relative '../../page_helpers/credit_card_page_helper_delete'
+FileUtilities.require_files_in_dir(FileUtilities.page_helpers_dir_absolute_path('credit_card'))
 
 class CreditCardPage < BasePage
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}
@@ -60,7 +59,7 @@ class CreditCardPage < BasePage
     type(login, LOGIN)
     type(password, PASSWORD)
     type(:return,  SIGN_IN)
-    wait_for(30) {is_displayed? NEXT_BUTTON}
+    wait_for(40) {is_displayed? NEXT_BUTTON}
     click NEXT_BUTTON
     wait_for(15) {is_displayed? CONTINUE_BUTTON}
     click CONTINUE_BUTTON

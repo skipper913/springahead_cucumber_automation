@@ -6,7 +6,7 @@ module CreditCardPageHelperDelete
     stop = false
     max_try = 5
     count = 0
-    unless (stop or count > max_try)
+    until (stop or count > max_try)
       count += 1
       delete_icons.each do |icon|
         icon.click

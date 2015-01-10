@@ -1,4 +1,4 @@
-@Tallie-Login
+@Tallie-login
 
 Feature: Tallie: Login and Logout Test
   Scenario: Verify login and logout function

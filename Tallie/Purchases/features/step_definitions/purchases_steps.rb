@@ -2,8 +2,6 @@
 
 Given /^I (am on|go to) Purchases page$/ do |temp|
   step %q{I am logged in to Tallie} #TODO need to bypass login and go to purchases page
- # @current_page = PurchasesPage.new(@driver)
- # @purchases_page = @current_page
 end
 
 When(/^I add a new expense with below data by clicking New Expense button:$/) do |table|

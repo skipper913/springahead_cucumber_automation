@@ -17,9 +17,4 @@ class LoginPage < BasePage
     type(password, PASSWORD_INPUT)
     submit SUBMIT_BUTTON
   end
-
-  def with_valid_credentials
-    login_with(@tallie_enterprise_account.default_employee_email, @tallie_enterprise_account.default_employee_password)
-  end
-
 end
