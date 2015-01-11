@@ -1,7 +1,11 @@
-FileUtilities.require_files_in_dir(FileUtilities.page_helpers_dir_absolute_path('purchases'))
+require_all FileUtilities.page_helpers_directory_path('purchases')
 
 class PurchasesPage < BasePage
   include PurchasesPageHelper
+  include PurchasesPageHelperCreditCard
+  include PurchasesPageHelperItemization
+  include PurchasesPageHelperDelete
+
 
   ADD_EXPENSE_BUTTON = {css: '.btn.btn-with-icon.btn-new-expense.action-create-expense'} #TODO Need an id
   EXPENSE_POPUP = {id: 'expense'}
@@ -21,10 +25,6 @@ class PurchasesPage < BasePage
   SAVE_BUTTON = {css: '#expense-form button[data-action=submit]'}
 
   BILLABLE_CHECKBOX = {id: 'billable'}
-
-  include PurchasesPageHelperCreditCard
-  include PurchasesPageHelperItemization
-  include PurchasesPageHelperDelete
 
   def initialize(driver)
     @driver = driver

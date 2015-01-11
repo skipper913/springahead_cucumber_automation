@@ -12,3 +12,4 @@ Feature: Tallie: Create New Expense
 
     Then the new expense tile is added on the page
     Then I stopped
+

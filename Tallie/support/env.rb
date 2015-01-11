@@ -1,4 +1,5 @@
 require 'selenium-webdriver'
+require 'require_all'
 
 if ENV['base_url'].include? 'alpha'
   ENV['env'] = 'alpha'
@@ -7,7 +8,6 @@ else
 end
 
 driver = Selenium::WebDriver.for ENV['browser'].to_sym
-#driver = Watir::Browser.new ENV['browser'].to_sym
 
 Before do
   @driver = driver

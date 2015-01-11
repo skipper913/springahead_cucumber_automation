@@ -1,4 +1,4 @@
-FileUtilities.require_files_in_dir(FileUtilities.page_helpers_dir_absolute_path('credit_card'))
+require_all FileUtilities.page_helpers_directory_path('credit_card')
 
 class CreditCardPage < BasePage
   ADD_CREDIT_CARD = {css: '#BankAccount button[data-action="add-bank-account"]'}
